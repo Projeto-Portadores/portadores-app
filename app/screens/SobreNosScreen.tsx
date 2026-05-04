@@ -9,32 +9,34 @@ import {
   StatusBar,
 } from 'react-native';
 
-// ─── Navbar inferior (componente reutilizável) ────────────────────────────────
-export function BottomNavBar({ onPress }: { onPress?: (tab: string) => void }) {
-  const tabs = [
-    { key: 'home',    emoji: '🏠' },
-    { key: 'caixa',   emoji: '📦' },
-    { key: 'novo',    emoji: '➕', destaque: true },
-    { key: 'dinheiro',emoji: '💰' },
-    { key: 'perfil',  emoji: '👤' },
-  ];
 
-  return (
-    <View style={nav.container}>
-      {tabs.map((tab) => (
-        <TouchableOpacity
-          key={tab.key}
-          style={tab.destaque ? nav.btnDestaque : nav.btn}
-          onPress={() => onPress?.(tab.key)}
-        >
-          <Text style={tab.destaque ? nav.emojiDestaque : nav.emoji}>
-            {tab.emoji}
-          </Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-  );
-}
+import { BottomNavBar } from '../components/BottomNavBar';
+// ─── Navbar inferior (componente reutilizável) ────────────────────────────────
+// export function BottomNavBar({ onPress }: { onPress?: (tab: string) => void }) {
+//   const tabs = [
+//     { key: 'home',    emoji: '🏠' },
+//     { key: 'caixa',   emoji: '📦' },
+//     { key: 'novo',    emoji: '➕', destaque: true },
+//     { key: 'dinheiro',emoji: '💰' },
+//     { key: 'perfil',  emoji: '👤' },
+//   ];
+
+//   return (
+//     <View style={nav.container}>
+//       {tabs.map((tab) => (
+//         <TouchableOpacity
+//           key={tab.key}
+//           style={tab.destaque ? nav.btnDestaque : nav.btn}
+//           onPress={() => onPress?.(tab.key)}
+//         >
+//           <Text style={tab.destaque ? nav.emojiDestaque : nav.emoji}>
+//             {tab.emoji}
+//           </Text>
+//         </TouchableOpacity>
+//       ))}
+//     </View>
+//   );
+// }
 
 const nav = StyleSheet.create({
   container: {
@@ -80,7 +82,7 @@ export default function SobreNosScreen({ navigation }: any) {
       {/* Header */}
       <View style={styles.header}>
         <Image
-          source={require('./assets/images/portadores_logo.png')}
+          source={require('../../assets/images/portadores-logo.png')}
           style={styles.logoSmall}
           resizeMode="contain"
         />
@@ -115,7 +117,9 @@ export default function SobreNosScreen({ navigation }: any) {
       </ScrollView>
 
       {/* Navbar */}
-      <BottomNavBar />
+       <BottomNavBar onPress={(tab) => {if (tab === 'home') {
+            navigation.navigate('MenuScreen');
+          }} }/>
     </View>
   );
 }

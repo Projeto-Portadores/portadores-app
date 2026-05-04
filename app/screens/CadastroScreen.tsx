@@ -8,9 +8,12 @@ import {
   StyleSheet,
   StatusBar,
   Switch,
+  
 } from 'react-native';
 
-export default function CadastroScreen() {
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+export default function CadastroScreen({ navigation }: any) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [lembrar, setLembrar] = useState(false);
@@ -21,7 +24,7 @@ export default function CadastroScreen() {
 
       {/* Logo + título */}
       <Image
-        source={require('./assets/images/portadores_logo.png')}
+        source={require('../../assets/images/portadores-logo.png')}
         style={styles.logo}
         resizeMode="contain"
       />
@@ -53,14 +56,16 @@ export default function CadastroScreen() {
         <Switch
           value={lembrar}
           onValueChange={setLembrar}
-          thumbColor={lembrar ? '#E8733A' : '#888'}
-          trackColor={{ false: '#444', true: '#c45a1e' }}
         />
-        <Text style={styles.lembrarText}>Me lembrar login</Text>
+        <Text style={styles.lembrarText}>Lembrar-me</Text>
       </View>
 
       {/* Botão */}
-      <TouchableOpacity style={styles.button} onPress={() => {}}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation?.navigate('SobreNos')}>
+        <Text style={styles.buttonText}>Entrar</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={() => navigation?.navigate('PrimeiroAcesso')}>
         <Text style={styles.buttonText}>Primeiro Acesso</Text>
       </TouchableOpacity>
     </View>
@@ -119,7 +124,8 @@ const styles = StyleSheet.create({
   },
   lembrarText: {
     color: '#D4CCBA',
-    fontSize: 14,
+    fontSize: 12,
+    width: '100%',
   },
   button: {
     marginTop: 40,
