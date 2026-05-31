@@ -1,0 +1,198 @@
+{
+  "usuarios": [
+    {
+      "id": "u001",
+      "nome": "Carlos Silva",
+      "email": "carlos@email.com",
+      "senha": "1234567",
+      "lembrarLogin": true,
+      "tipoPerfil": "Entregador"
+    },
+    {
+      "id": "u002",
+      "nome": "Ana Souza",
+      "email": "ana@email.com",
+      "senha": "1234567",
+      "lembrarLogin": true,
+      "tipoPerfil": "Entregador"
+    }
+  ],
+
+  "niveis": [
+    { "id": "n001", "nome": "Ferro",   "titulo": "Aspirante", "xpMinimo": 0,   "xpMaximo": 100  },
+    { "id": "n002", "nome": "Bronze",  "titulo": "Mensageiro","xpMinimo": 101, "xpMaximo": 300  },
+    { "id": "n003", "nome": "Prata",   "titulo": "Portador",  "xpMinimo": 301, "xpMaximo": 600  },
+    { "id": "n004", "nome": "Ouro",    "titulo": "Veterano",  "xpMinimo": 601, "xpMaximo": 1000 },
+    { "id": "n005", "nome": "Platina", "titulo": "Lendário",  "xpMinimo": 1001,"xpMaximo": 9999 }
+  ],
+
+  "progresso": [
+    {
+      "id": "p001",
+      "usuarioId": "u001",
+      "nivelId": "n001",
+      "xpAtual": 52,
+      "xpTotal": 100
+    },
+    {
+      "id": "p002",
+      "usuarioId": "u002",
+      "nivelId": "n002",
+      "xpAtual": 180,
+      "xpTotal": 300
+    }
+  ],
+
+  "missoes": [
+    {
+      "id": "m001",
+      "descricao": "Primeira entrega",
+      "xpRecompensa": 10,
+      "emoji": "🔴"
+    },
+    {
+      "id": "m002",
+      "descricao": "Entrega dentro do prazo",
+      "xpRecompensa": 15,
+      "emoji": "⏳"
+    },
+    {
+      "id": "m003",
+      "descricao": "Entrega com avaliação positiva",
+      "xpRecompensa": 10,
+      "emoji": "🌀"
+    },
+    {
+      "id": "m004",
+      "descricao": "5 entregas em um dia",
+      "xpRecompensa": 30,
+      "emoji": "🔥"
+    },
+    {
+      "id": "m005",
+      "descricao": "Entrega sem nenhuma reclamação",
+      "xpRecompensa": 20,
+      "emoji": "⭐"
+    }
+  ],
+
+  "missoes_concluidas": [
+    { "id": "mc001", "usuarioId": "u001", "missaoId": "m001", "concluidaEm": "2026-03-10T14:00:00Z" },
+    { "id": "mc002", "usuarioId": "u001", "missaoId": "m002", "concluidaEm": "2026-03-12T16:30:00Z" }
+  ],
+
+  "entregas": [
+    {
+      "id": "e001",
+      "usuarioId": null,
+      "status": "disponivel",
+      "valor": 18.50,
+      "distanciaKm": 5.2,
+      "tempoEstimadoMin": 25,
+      "cepOrigem": "36.773.665",
+      "cepDestino": "36.773.190",
+      "criadoEm": "2026-05-04T08:00:00Z",
+      "atualizadoEm": "2026-05-04T08:00:00Z"
+    },
+    {
+      "id": "e002",
+      "usuarioId": null,
+      "status": "disponivel",
+      "valor": 13.10,
+      "distanciaKm": 4.8,
+      "tempoEstimadoMin": 15,
+      "cepOrigem": "36.773.668",
+      "cepDestino": "36.773.190",
+      "criadoEm": "2026-05-04T08:15:00Z",
+      "atualizadoEm": "2026-05-04T08:15:00Z"
+    },
+    {
+      "id": "e003",
+      "usuarioId": null,
+      "status": "disponivel",
+      "valor": 10.90,
+      "distanciaKm": 2.8,
+      "tempoEstimadoMin": 10,
+      "cepOrigem": "36.773.668",
+      "cepDestino": "36.773.190",
+      "criadoEm": "2026-05-04T08:30:00Z",
+      "atualizadoEm": "2026-05-04T08:30:00Z"
+    },
+    {
+      "id": "e004",
+      "usuarioId": "u001",
+      "status": "entregue",
+      "valor": 25.00,
+      "distanciaKm": 6.1,
+      "tempoEstimadoMin": 30,
+      "cepOrigem": "36.773.668",
+      "cepDestino": "36.773.190",
+      "criadoEm": "2026-03-18T10:00:00Z",
+      "atualizadoEm": "2026-03-18T10:45:00Z",
+      "avaliacao": {
+        "estrelas": 5,
+        "dataAvaliacao": "18/03/2026"
+      }
+    },
+    {
+      "id": "e005",
+      "usuarioId": "u001",
+      "status": "entregue",
+      "valor": 22.00,
+      "distanciaKm": 4.5,
+      "tempoEstimadoMin": 20,
+      "cepOrigem": "36.773.668",
+      "cepDestino": "36.773.190",
+      "criadoEm": "2026-03-15T14:00:00Z",
+      "atualizadoEm": "2026-03-15T14:30:00Z",
+      "avaliacao": {
+        "estrelas": 4,
+        "dataAvaliacao": "15/03/2026"
+      }
+    }
+  ],
+
+  "pagamentos": [
+    {
+      "id": "pg001",
+      "usuarioId": "u001",
+      "entregaId": "e004",
+      "valor": 25.00,
+      "status": "pago",
+      "qrCodePix": "00020126360014br.gov.bcb.pix...",
+      "criadoEm": "2026-03-18T10:45:00Z"
+    },
+    {
+      "id": "pg002",
+      "usuarioId": "u001",
+      "entregaId": "e005",
+      "valor": 22.00,
+      "status": "pago",
+      "qrCodePix": "00020126360014br.gov.bcb.pix...",
+      "criadoEm": "2026-03-15T14:30:00Z"
+    }
+  ],
+
+  "saques": [
+    {
+      "id": "s001",
+      "usuarioId": "u001",
+      "valor": 47.00,
+      "chavePix": "8f3a9c72-b1e4-4d6f-9a21-7c5b8e3d2f90",
+      "status": "pendente",
+      "criadoEm": "2026-05-04T09:00:00Z"
+    }
+  ],
+
+  "ganhos": [
+    {
+      "id": "g001",
+      "usuarioId": "u001",
+      "periodo": "semana",
+      "totalEntregas": 2,
+      "totalValor": 47.00,
+      "dataInicio": "2026-04-28",
+      "dataFim": "2026-05-04"
+    }
+  ]
+}

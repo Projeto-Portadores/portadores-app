@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  StatusBar,
-} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import AppHeader from '../components/AppHeader';
+import BottomNavBar from '../components/BottomNavBar';
+import Button from '../components/Button';
+import { cores } from '../theme';
 
 type Periodo = 'Hoje' | 'Semana' | 'Mês';
 
@@ -22,26 +19,12 @@ export default function MeusGanhosScreen({ navigation }: any) {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#1C2540" />
-
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation?.navigate('SobreNos')}>
-          <Image
-            source={require('./assets/images/portadores_logo.png')}
-            style={styles.logoSmall}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation?.goBack()}>
-          <Text style={styles.exitIcon}>📤</Text>
-        </TouchableOpacity>
-      </View>
+      <AppHeader navigation={navigation} />
 
       <View style={styles.content}>
         <Text style={styles.pageTitle}>Meus ganhos</Text>
 
-        {/* Filtro de período */}
+        {/* Filtro */}
         <View style={styles.filtroRow}>
           {(['Hoje', 'Semana', 'Mês'] as Periodo[]).map((p) => (
             <TouchableOpacity
@@ -49,14 +32,12 @@ export default function MeusGanhosScreen({ navigation }: any) {
               style={[styles.filtroBtn, periodo === p && styles.filtroBtnAtivo]}
               onPress={() => setPeriodo(p)}
             >
-              <Text style={[styles.filtroText, periodo === p && styles.filtroTextAtivo]}>
-                {p}
-              </Text>
+              <Text style={[styles.filtroText, periodo === p && styles.filtroTextAtivo]}>{p}</Text>
             </TouchableOpacity>
           ))}
         </View>
 
-        {/* Card saldo */}
+        {/* Saldo */}
         <View style={styles.saldoCard}>
           <Text style={styles.walletEmoji}>👛</Text>
           <View>
@@ -65,7 +46,6 @@ export default function MeusGanhosScreen({ navigation }: any) {
           </View>
         </View>
 
-        {/* Detalhes */}
         <Text style={styles.detalhesLabel}>Detalhes da {periodo}</Text>
 
         <View style={styles.detalheRow}>
@@ -77,131 +57,35 @@ export default function MeusGanhosScreen({ navigation }: any) {
           <Text style={styles.detalheValor}>{dados.total}</Text>
         </View>
 
-        {/* Botão resgatar */}
-        <TouchableOpacity style={styles.btnResgatar} onPress={() => {}}>
-          <Text style={styles.btnResgatarText}>Resgatar pagamento</Text>
-        </TouchableOpacity>
+        <Button
+          texto="Resgatar pagamento"
+          onPress={() => navigation.navigate('Saque', { valor: dados.saldo, chavePix: '' })}
+        />
       </View>
 
-      {/* Navbar */}
-      <View style={styles.navbar}>
-        <TouchableOpacity style={styles.navBtn}><Text style={styles.navEmoji}>🏠</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.navBtn}><Text style={styles.navEmoji}>📦</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.navBtnDestaque}><Text style={styles.navEmojiDestaque}>➕</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.navBtn}><Text style={styles.navEmoji}>💰</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.navBtn}><Text style={styles.navEmoji}>👤</Text></TouchableOpacity>
-      </View>
+      <BottomNavBar navigation={navigation} usuarioLogado={true} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#1C2540' },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 48,
-    paddingBottom: 8,
-  },
-  logoSmall: { width: 48, height: 48 },
-  exitIcon: { fontSize: 26 },
-  content: {
-    flex: 1,
-    paddingHorizontal: 24,
-    paddingTop: 8,
-  },
-  pageTitle: {
-    color: '#ffffff',
-    fontSize: 28,
-    fontWeight: '700',
-    textAlign: 'center',
-    marginBottom: 24,
-  },
-
-  // Filtro
-  filtroRow: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 12,
-    marginBottom: 24,
-  },
-  filtroBtn: {
-    borderWidth: 1.5,
-    borderColor: '#4a5a7a',
-    borderRadius: 20,
-    paddingVertical: 6,
-    paddingHorizontal: 20,
-  },
-  filtroBtnAtivo: {
-    backgroundColor: '#4A90D9',
-    borderColor: '#4A90D9',
-  },
-  filtroText: { color: '#b0bcd4', fontSize: 14 },
-  filtroTextAtivo: { color: '#ffffff', fontWeight: '700' },
-
-  // Saldo
-  saldoCard: {
-    backgroundColor: '#243055',
-    borderRadius: 14,
-    padding: 18,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 16,
-    marginBottom: 28,
-  },
+  container: { flex: 1, backgroundColor: cores.fundo },
+  content: { flex: 1, paddingHorizontal: 24, paddingTop: 8 },
+  pageTitle: { color: cores.textoBranco, fontSize: 28, fontWeight: '700', textAlign: 'center', marginBottom: 24 },
+  filtroRow: { flexDirection: 'row', justifyContent: 'center', gap: 12, marginBottom: 24 },
+  filtroBtn: { borderWidth: 1.5, borderColor: '#4a5a7a', borderRadius: 20, paddingVertical: 6, paddingHorizontal: 20 },
+  filtroBtnAtivo: { backgroundColor: cores.azul, borderColor: cores.azul },
+  filtroText: { color: cores.textoFraco, fontSize: 14 },
+  filtroTextAtivo: { color: cores.textoBranco, fontWeight: '700' },
+  saldoCard: { backgroundColor: cores.card, borderRadius: 14, padding: 18, flexDirection: 'row', alignItems: 'center', gap: 16, marginBottom: 28 },
   walletEmoji: { fontSize: 32 },
-  saldoLabel: { color: '#b0bcd4', fontSize: 13, marginBottom: 4 },
-  saldoValor: { color: '#ffffff', fontSize: 22, fontWeight: '700' },
-
-  // Detalhes
-  detalhesLabel: {
-    color: '#b0bcd4',
-    fontSize: 14,
-    marginBottom: 14,
-  },
-  detalheRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    marginBottom: 40,
-  },
+  saldoLabel: { color: cores.textoFraco, fontSize: 13, marginBottom: 4 },
+  saldoValor: { color: cores.textoBranco, fontSize: 22, fontWeight: '700' },
+  detalhesLabel: { color: cores.textoFraco, fontSize: 14, marginBottom: 14 },
+  detalheRow: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 40 },
   boxEmoji: { fontSize: 28 },
   detalheTextos: { flex: 1 },
-  detalheTitle: { color: '#ffffff', fontSize: 14, fontWeight: '600' },
+  detalheTitle: { color: cores.textoBranco, fontSize: 14, fontWeight: '600' },
   detalheSubtitle: { color: '#6a7a9a', fontSize: 12, marginTop: 2 },
-  detalheValor: { color: '#E8733A', fontSize: 15, fontWeight: '700' },
-
-  // Botão
-  btnResgatar: {
-    backgroundColor: '#1a1a2e',
-    borderRadius: 30,
-    paddingVertical: 16,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#333',
-  },
-  btnResgatarText: { color: '#ffffff', fontSize: 16, fontWeight: '700' },
-
-  // Navbar
-  navbar: {
-    flexDirection: 'row',
-    backgroundColor: '#1C2540',
-    borderTopWidth: 1,
-    borderTopColor: '#2e3a5c',
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  navBtn: { flex: 1, alignItems: 'center', paddingVertical: 4 },
-  navBtnDestaque: {
-    width: 52, height: 52, borderRadius: 26,
-    backgroundColor: '#2e3a5c',
-    alignItems: 'center', justifyContent: 'center',
-    marginHorizontal: 8, borderWidth: 2, borderColor: '#4A90D9',
-  },
-  navEmoji: { fontSize: 22 },
-  navEmojiDestaque: { fontSize: 26 },
+  detalheValor: { color: cores.laranja, fontSize: 15, fontWeight: '700' },
 });

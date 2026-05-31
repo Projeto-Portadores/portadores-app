@@ -1,46 +1,17 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  StatusBar,
-} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import AppHeader from '../components/AppHeader';
+import BottomNavBar from '../components/BottomNavBar';
+import { cores } from '../theme';
 
-interface SaqueScreenProps {
-  navigation?: any;
-  route?: {
-    params?: {
-      valor?: string;
-      chavePix?: string;
-    };
-  };
-}
-
-export default function SaqueScreen({ navigation, route }: SaqueScreenProps) {
+export default function SaqueScreen({ navigation, route }: any) {
   const valor    = route?.params?.valor    ?? 'R$ 47,00';
   const chavePix = route?.params?.chavePix ?? '8f3a9c72-b1e4-4d6f-9a21-7c5b8e3d2f90';
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#1C2540" />
+      <AppHeader navigation={navigation} />
 
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation?.navigate('SobreNos')}>
-          <Image
-            source={require('./assets/images/portadores_logo.png')}
-            style={styles.logoSmall}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation?.goBack()}>
-          <Text style={styles.exitIcon}>📤</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Conteúdo */}
       <View style={styles.content}>
         <Text style={styles.pageTitle}>Saque</Text>
 
@@ -55,92 +26,18 @@ export default function SaqueScreen({ navigation, route }: SaqueScreenProps) {
         </View>
       </View>
 
-      {/* Navbar */}
-      <View style={styles.navbar}>
-        <TouchableOpacity style={styles.navBtn}><Text style={styles.navEmoji}>🏠</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.navBtn}><Text style={styles.navEmoji}>📦</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.navBtnDestaque}><Text style={styles.navEmojiDestaque}>➕</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.navBtn}><Text style={styles.navEmoji}>💰</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.navBtn}><Text style={styles.navEmoji}>👤</Text></TouchableOpacity>
-      </View>
+      <BottomNavBar navigation={navigation} usuarioLogado={true} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#1C2540' },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 48,
-    paddingBottom: 8,
-  },
-  logoSmall: { width: 48, height: 48 },
-  exitIcon: { fontSize: 26 },
-
-  content: {
-    flex: 1,
-    alignItems: 'center',
-    paddingHorizontal: 32,
-    paddingTop: 24,
-  },
-  pageTitle: {
-    color: '#ffffff',
-    fontSize: 28,
-    fontWeight: '700',
-    marginBottom: 36,
-  },
-  label: {
-    color: '#b0bcd4',
-    fontSize: 14,
-    marginBottom: 10,
-    alignSelf: 'center',
-  },
-  valorBox: {
-    backgroundColor: '#243055',
-    borderRadius: 12,
-    paddingVertical: 12,
-    paddingHorizontal: 40,
-    marginBottom: 32,
-  },
-  valorText: {
-    color: '#F5C842',
-    fontSize: 26,
-    fontWeight: '700',
-  },
-  chaveBox: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#4a5a7a',
-    paddingVertical: 10,
-    width: '100%',
-    alignItems: 'center',
-  },
-  chaveText: {
-    color: '#b0bcd4',
-    fontSize: 13,
-    letterSpacing: 0.5,
-  },
-
-  // Navbar
-  navbar: {
-    flexDirection: 'row',
-    backgroundColor: '#1C2540',
-    borderTopWidth: 1,
-    borderTopColor: '#2e3a5c',
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  navBtn: { flex: 1, alignItems: 'center', paddingVertical: 4 },
-  navBtnDestaque: {
-    width: 52, height: 52, borderRadius: 26,
-    backgroundColor: '#2e3a5c',
-    alignItems: 'center', justifyContent: 'center',
-    marginHorizontal: 8, borderWidth: 2, borderColor: '#4A90D9',
-  },
-  navEmoji: { fontSize: 22 },
-  navEmojiDestaque: { fontSize: 26 },
+  container: { flex: 1, backgroundColor: cores.fundo },
+  content: { flex: 1, alignItems: 'center', paddingHorizontal: 32, paddingTop: 24 },
+  pageTitle: { color: cores.textoBranco, fontSize: 28, fontWeight: '700', marginBottom: 36 },
+  label: { color: cores.textoFraco, fontSize: 14, marginBottom: 10, alignSelf: 'center' },
+  valorBox: { backgroundColor: cores.card, borderRadius: 12, paddingVertical: 12, paddingHorizontal: 40, marginBottom: 32 },
+  valorText: { color: cores.amarelo, fontSize: 26, fontWeight: '700' },
+  chaveBox: { borderBottomWidth: 1, borderBottomColor: '#4a5a7a', paddingVertical: 10, width: '100%', alignItems: 'center' },
+  chaveText: { color: cores.textoFraco, fontSize: 13, letterSpacing: 0.5 },
 });
