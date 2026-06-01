@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import AppHeader from '../components/AppHeader';
 import BottomNavBar from '../components/BottomNavBar';
 import { cores } from '../theme';
+import db from '../Back-End/db.json';
+
+const USUARIO_LOGADO = 'u001'; // Usuário logado
 
 function Estrelas({ quantidade }: { quantidade: number }) {
   return (
@@ -21,11 +24,15 @@ function CardEntregaFeita({ item }: { item: any }) {
       <View style={card.row}>
         <View style={card.left}>
           <View style={[card.statusBadge, { borderColor: cores.azul }]}>
-            <Text style={[card.statusText, { color: cores.azul }]}>{item.status}</Text>
+            <Text style={[card.statusText, { color: cores.azul }]}>{item.status === 'aceita' ? 'Aceita' : 'Entregue'}</Text>
           </View>
-          <Text style={card.avaliacaoLabel}>Avaliação</Text>
-          <Estrelas quantidade={item.avaliacao.estrelas} />
-          <Text style={card.data}>Avaliado em {item.avaliacao.dataAvaliacao}</Text>
+          {item.avaliacao && (
+            <>
+              <Text style={card.avaliacaoLabel}>Avaliação</Text>
+              <Estrelas quantidade={item.avaliacao.estrelas} />
+              <Text style={card.data}>Avaliado em {item.avaliacao.dataAvaliacao}</Text>
+            </>
+          )}
         </View>
         <View style={card.right}>
           <Text style={card.cep}>CEP: {item.cepOrigem}</Text>
@@ -51,19 +58,23 @@ const card = StyleSheet.create({
   valor: { color: cores.laranja, fontSize: 16, fontWeight: '700' },
 });
 
-const ENTREGAS_FEITAS = [
-  { id: 'e004', status: 'Entregue', cepOrigem: '36.773.668', cepDestino: '36.773.190', valor: 25.00, avaliacao: { estrelas: 5, dataAvaliacao: '18/03/2026' } },
-  { id: 'e005', status: 'Entregue', cepOrigem: '36.773.668', cepDestino: '36.773.190', valor: 22.00, avaliacao: { estrelas: 4, dataAvaliacao: '15/03/2026' } },
-];
-
 export default function MinhasEntregasScreen({ navigation }: any) {
+  const [entregasFeitas, setEntregasFeitas] = useState<any[]>([]);
+
+  useEffect(() => {
+    const entregas = db.entregas.filter(
+      (e: any) => e.usuarioId === USUARIO_LOGADO && e.status !== 'disponivel'
+    );
+    setEntregasFeitas(entregas);
+  }, []);
+
   return (
     <View style={styles.container}>
       <AppHeader navigation={navigation} />
 
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.pageTitle}>Minhas entregas</Text>
-        {ENTREGAS_FEITAS.map((item) => (
+        {entregasFeitas.map((item) => (
           <CardEntregaFeita key={item.id} item={item} />
         ))}
       </ScrollView>

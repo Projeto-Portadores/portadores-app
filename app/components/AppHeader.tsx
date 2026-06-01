@@ -11,12 +11,14 @@ import { cores } from '../theme';
 export default function AppHeader({ navigation }: { navigation: any }) {
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../../assets/images/portadores-logo.png')}
-        style={styles.logo}
-        resizeMode="contain"
-      />
-      <TouchableOpacity onPress={() => navigation?.goBack()}>
+      <TouchableOpacity onPress={() => navigation?.navigate('SobreNosScreen')}>
+        <Image
+          source={require('../../assets/images/portadores-logo.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation?.navigate('CadastroScreen')}>
         <Text style={styles.exitIcon}>📤</Text>
       </TouchableOpacity>
     </View>
@@ -29,11 +31,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 16,
-    paddingTop: 12,
+    paddingTop: 8,
     paddingBottom: 12,
     backgroundColor: cores.fundo,
     borderBottomWidth: 1,
     borderBottomColor: cores.borda,
+    marginTop: 8,
   },
   logo: {
     width: 40,

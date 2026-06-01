@@ -33,11 +33,11 @@ export default function SaqueScreen({ navigation, route }: any) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: cores.fundo },
-  content: { flex: 1, alignItems: 'center', paddingHorizontal: 32, paddingTop: 24 },
+  content: { flex: 1, alignItems: 'center', paddingHorizontal: 10, paddingTop: 24 },
   pageTitle: { color: cores.textoBranco, fontSize: 28, fontWeight: '700', marginBottom: 36 },
-  label: { color: cores.textoFraco, fontSize: 14, marginBottom: 10, alignSelf: 'center' },
+  label: { color: cores.textoFraco, fontSize: 12, marginBottom: 10, alignSelf: 'center', flexWrap: 'wrap', textAlign: 'center', width: '100%' },
   valorBox: { backgroundColor: cores.card, borderRadius: 12, paddingVertical: 12, paddingHorizontal: 40, marginBottom: 32 },
   valorText: { color: cores.amarelo, fontSize: 26, fontWeight: '700' },
-  chaveBox: { borderBottomWidth: 1, borderBottomColor: '#4a5a7a', paddingVertical: 10, width: '100%', alignItems: 'center' },
-  chaveText: { color: cores.textoFraco, fontSize: 13, letterSpacing: 0.5 },
+  chaveBox: { borderBottomWidth: 1, borderBottomColor: '#4a5a7a', paddingVertical: 10, paddingHorizontal: 10, width: '100%', alignItems: 'center' },
+  chaveText: { color: cores.textoFraco, fontSize: 11, letterSpacing: 0.5, flexWrap: 'wrap', textAlign: 'center', width: '100%' },
 });

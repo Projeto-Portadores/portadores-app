@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { cores } from '../theme';
 
 export default function BottomNavBar({
@@ -16,12 +17,13 @@ export default function BottomNavBar({
   usuarioLogado?: boolean;
   onPress?: (tab: string) => void;
 }) {
+  const insets = useSafeAreaInsets();
   const tabs = [
     { key: 'home', emoji: '🏠', screen: 'MenuScreen' },
     { key: 'caixa', emoji: '📦', screen: 'MinhasEntregasScreen' },
     { key: 'novo', emoji: '➕', destaque: true, screen: 'NovasEntregasScreen' },
     { key: 'dinheiro', emoji: '💰', screen: 'MeusGanhosScreen' },
-    { key: 'perfil', emoji: '👤', screen: 'ConsultaScreen' },
+    { key: 'perfil', emoji: '👤', screen: 'ConquistasScreen' },
   ];
 
   const handlePress = (tab: { key: string; screen: string }) => {
@@ -33,7 +35,7 @@ export default function BottomNavBar({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingBottom: insets.bottom }]}>
       {tabs.map((tab) => (
         <TouchableOpacity
           key={tab.key}

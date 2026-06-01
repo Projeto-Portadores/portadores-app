@@ -59,7 +59,7 @@ export default function MeusGanhosScreen({ navigation }: any) {
 
         <Button
           texto="Resgatar pagamento"
-          onPress={() => navigation.navigate('Saque', { valor: dados.saldo, chavePix: '' })}
+          onPress={() => navigation.navigate('SaqueScreen', { valor: dados.saldo, chavePix: null })}
         />
       </View>
 

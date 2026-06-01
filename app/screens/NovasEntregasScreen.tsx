@@ -3,9 +3,24 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator
 import AppHeader from '../components/AppHeader';
 import BottomNavBar from '../components/BottomNavBar';
 import { cores } from '../theme';
+import db from '../Back-End/db.json';
 
-const BASE_URL = 'http://10.0.2.2:3000';
-// const BASE_URL = 'http://localhost:3000'; // iOS simulator
+interface Entrega {
+  id: string;
+  usuarioId: string | null;
+  status: string;
+  valor: number;
+  distanciaKm: number;
+  tempoEstimadoMin: number;
+  cepOrigem: string;
+  cepDestino: string;
+  criadoEm: string;
+  atualizadoEm: string;
+  avaliacao?: {
+    estrelas: number;
+    dataAvaliacao: string;
+  };
+}
 
 function CardEntrega({ entrega, onAceitar, onRecusar }: any) {
   return (
@@ -50,15 +65,14 @@ const card = StyleSheet.create({
 });
 
 export default function NovasEntregasScreen({ navigation }: any) {
-  const [entregas, setEntregas] = useState([]);
+  const [entregas, setEntregas] = useState<Entrega[]>([]);
   const [loading, setLoading] = useState(true);
 
   async function buscarEntregas() {
     setLoading(true);
     try {
-      const resposta = await fetch(`${BASE_URL}/entregas?status=disponivel`);
-      const dados = await resposta.json();
-      setEntregas(dados);
+      const entregasDisponiveis = db.entregas.filter((e: any) => e.status === 'disponivel');
+      setEntregas(entregasDisponiveis);
     } catch {
       Alert.alert('Erro', 'Não foi possível carregar as entregas.');
     } finally {
@@ -68,13 +82,13 @@ export default function NovasEntregasScreen({ navigation }: any) {
 
   async function aceitarEntrega(id: string) {
     try {
-      await fetch(`${BASE_URL}/entregas/${id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: 'aceita' }),
-      });
-      Alert.alert('Entrega aceita!');
-      buscarEntregas();
+      const entrega = db.entregas.find((e: any) => e.id === id);
+      if (entrega) {
+        entrega.status = 'aceita';
+        entrega.usuarioId = 'u001';
+        const valorFormatado = `R$ ${entrega.valor.toFixed(2)}`;
+        navigation.navigate('PagamentoScreen', { valor: valorFormatado });
+      }
     } catch {
       Alert.alert('Erro', 'Não foi possível aceitar a entrega.');
     }
@@ -82,13 +96,12 @@ export default function NovasEntregasScreen({ navigation }: any) {
 
   async function recusarEntrega(id: string) {
     try {
-      await fetch(`${BASE_URL}/entregas/${id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: 'recusada' }),
-      });
-      Alert.alert('Entrega recusada.');
-      buscarEntregas();
+      const entrega = db.entregas.find((e: any) => e.id === id);
+      if (entrega) {
+        entrega.status = 'recusada';
+        Alert.alert('Entrega recusada.');
+        buscarEntregas();
+      }
     } catch {
       Alert.alert('Erro', 'Não foi possível recusar a entrega.');
     }

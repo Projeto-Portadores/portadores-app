@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import CadastroScreen from './app/screens/CadastroScreen';
 import PrimeiroAcessoScreen from './app/screens/PrimeiroAcessoScreen';
 import SobreNosScreen from './app/screens/SobreNosScreen';
@@ -21,13 +22,14 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator   screenOptions={{ 
-          headerShown: false,
-        }}>
-        <Stack.Screen name="Cadastro" component={CadastroScreen} />
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator   screenOptions={{ 
+            headerShown: false,
+          }}>
+        <Stack.Screen name="CadastroScreen" component={CadastroScreen} />
         <Stack.Screen name="PrimeiroAcesso" component={PrimeiroAcessoScreen} />
-        <Stack.Screen name="SobreNos" component={SobreNosScreen} />
+        <Stack.Screen name="SobreNosScreen" component={SobreNosScreen} />
         <Stack.Screen name="MenuScreen" component={MenuScreen} />
         <Stack.Screen name="MinhasEntregasScreen" component={MinhasEntregasScreen} />
         <Stack.Screen name="NovasEntregasScreen" component={NovasEntregasScreen} />
@@ -39,8 +41,10 @@ export default function App() {
         <Stack.Screen name="PagamentoScreen" component={PagamentoScreen} />
         <Stack.Screen name="RegistroScreen" component={RegistroScreen} />
         <Stack.Screen name="MapaScreen" component={MapaScreen} />
+        <Stack.Screen name="PrimeiroAcessoScreen" component={PrimeiroAcessoScreen} />
       </Stack.Navigator>
-    </NavigationContainer>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 

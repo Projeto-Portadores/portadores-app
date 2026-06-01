@@ -13,10 +13,10 @@ import { cores } from '../theme';
 
 export default function MenuScreen({ navigation }: any) {
   const menuItems = [
-    { label: 'Consultar pedido', key: 'Consulta', screen: 'ConsultaScreen' },
+    // { label: 'Consultar pedido', key: 'Consulta', screen: 'ConsultaScreen' },
     { label: 'Minhas entregas', key: 'minhas-entregas', screen: 'MinhasEntregasScreen' },
-    { label: 'Solicitação', key: 'solicitacao', screen: 'SolicitacaoScreen' },
-    { label: 'Sobre nós', key: 'sobre-nos', screen: 'SobreNos' },
+    { label: 'Mapa', key: 'mapa', screen: 'MapaScreen' },
+    // { label: 'Sobre nós', key: 'sobre-nos', screen: 'SobreNos' },
   ];
 
   const handleMenuPress = (screen: string) => {

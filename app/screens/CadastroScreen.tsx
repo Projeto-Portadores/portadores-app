@@ -61,7 +61,7 @@ export default function CadastroScreen({ navigation }: any) {
       </View>
 
       {/* Botão */}
-      <TouchableOpacity style={styles.button} onPress={() => navigation?.navigate('SobreNos')}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation?.navigate('MenuScreen')}>
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
 

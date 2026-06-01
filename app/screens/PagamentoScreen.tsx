@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import QRCode from 'react-native-qrcode-svg';
 import BottomNavBar from '../components/BottomNavBar';
 import { cores } from '../theme';
 import AppHeader from '../components/AppHeader';
@@ -21,7 +22,12 @@ export default function PagamentoScreen({ navigation, route }: any) {
 
         <Text style={styles.label}>QR-Code PIX</Text>
         <View style={styles.qrBox}>
-          <Text style={styles.qrPlaceholder}>📱 QR Code PIX</Text>
+          <QRCode
+            value={valor}
+            size={180}
+            color={cores.azul}
+            backgroundColor={cores.card}
+          />
         </View>
 
         <Text style={styles.instrucao}>
@@ -42,7 +48,5 @@ const styles = StyleSheet.create({
   valorBox: { backgroundColor: cores.card, borderRadius: 12, paddingVertical: 12, paddingHorizontal: 40, marginBottom: 28 },
   valorText: { color: cores.amarelo, fontSize: 26, fontWeight: '700' },
   qrBox: { backgroundColor: cores.card, borderRadius: 12, padding: 40, marginBottom: 24, alignItems: 'center', justifyContent: 'center', minHeight: 200 },
-  qrPlaceholder: { fontSize: 60, color: cores.azul },
-  qrImage: { width: 180, height: 180 },
   instrucao: { color: cores.textoFraco, fontSize: 13, textAlign: 'center', lineHeight: 20 },
 });

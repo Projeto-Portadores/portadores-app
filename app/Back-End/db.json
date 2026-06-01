@@ -89,8 +89,8 @@
       "valor": 18.50,
       "distanciaKm": 5.2,
       "tempoEstimadoMin": 25,
-      "cepOrigem": "36.773.665",
-      "cepDestino": "36.773.190",
+      "cepOrigem": "36.773-668",
+      "cepDestino": "36.770-970",
       "criadoEm": "2026-05-04T08:00:00Z",
       "atualizadoEm": "2026-05-04T08:00:00Z"
     },
@@ -101,8 +101,8 @@
       "valor": 13.10,
       "distanciaKm": 4.8,
       "tempoEstimadoMin": 15,
-      "cepOrigem": "36.773.668",
-      "cepDestino": "36.773.190",
+      "cepOrigem": "36.770-970",
+      "cepDestino": "36.772-188",
       "criadoEm": "2026-05-04T08:15:00Z",
       "atualizadoEm": "2026-05-04T08:15:00Z"
     },
@@ -113,20 +113,92 @@
       "valor": 10.90,
       "distanciaKm": 2.8,
       "tempoEstimadoMin": 10,
-      "cepOrigem": "36.773.668",
-      "cepDestino": "36.773.190",
+      "cepOrigem": "36.772-188",
+      "cepDestino": "36.772-022",
       "criadoEm": "2026-05-04T08:30:00Z",
       "atualizadoEm": "2026-05-04T08:30:00Z"
     },
     {
       "id": "e004",
+      "usuarioId": null,
+      "status": "disponivel",
+      "valor": 15.50,
+      "distanciaKm": 3.5,
+      "tempoEstimadoMin": 18,
+      "cepOrigem": "36.701-210",
+      "cepDestino": "36.701-220",
+      "criadoEm": "2026-05-04T09:00:00Z",
+      "atualizadoEm": "2026-05-04T09:00:00Z"
+    },
+    {
+      "id": "e005",
+      "usuarioId": null,
+      "status": "disponivel",
+      "valor": 12.75,
+      "distanciaKm": 3.2,
+      "tempoEstimadoMin": 16,
+      "cepOrigem": "36.772-022",
+      "cepDestino": "36.770-604",
+      "criadoEm": "2026-05-04T09:15:00Z",
+      "atualizadoEm": "2026-05-04T09:15:00Z"
+    },
+    {
+      "id": "e006",
+      "usuarioId": null,
+      "status": "disponivel",
+      "valor": 14.20,
+      "distanciaKm": 4.0,
+      "tempoEstimadoMin": 20,
+      "cepOrigem": "36.772-022",
+      "cepDestino": "36.771-000",
+      "criadoEm": "2026-05-04T09:30:00Z",
+      "atualizadoEm": "2026-05-04T09:30:00Z"
+    },
+    {
+      "id": "e007",
+      "usuarioId": "u001",
+      "status": "disponivel",
+      "valor": 11.50,
+      "distanciaKm": 2.5,
+      "tempoEstimadoMin": 12,
+      "cepOrigem": "36.772-022",
+      "cepDestino": "36.770-970",
+      "criadoEm": "2026-05-04T09:45:00Z",
+      "atualizadoEm": "2026-05-04T09:45:00Z"
+    },
+    {
+      "id": "e008",
+      "usuarioId": "u001",
+      "status": "disponivel",
+      "valor": 16.80,
+      "distanciaKm": 4.5,
+      "tempoEstimadoMin": 22,
+      "cepOrigem": "36.772-022",
+      "cepDestino": "36.771-521",
+      "criadoEm": "2026-05-04T10:00:00Z",
+      "atualizadoEm": "2026-05-04T10:00:00Z"
+    },
+    {
+      "id": "e009",
+      "usuarioId": "u002",
+      "status": "disponivel",
+      "valor": 13.45,
+      "distanciaKm": 3.8,
+      "tempoEstimadoMin": 19,
+      "cepOrigem": "36.772-022",
+      "cepDestino": "36.771-416",
+      "criadoEm": "2026-05-04T10:15:00Z",
+      "atualizadoEm": "2026-05-04T10:15:00Z"
+    },
+    {
+      "id": "e010",
       "usuarioId": "u001",
       "status": "entregue",
       "valor": 25.00,
       "distanciaKm": 6.1,
       "tempoEstimadoMin": 30,
-      "cepOrigem": "36.773.668",
-      "cepDestino": "36.773.190",
+      "cepOrigem": "36.701-300",
+      "cepDestino": "36.701-140",
       "criadoEm": "2026-03-18T10:00:00Z",
       "atualizadoEm": "2026-03-18T10:45:00Z",
       "avaliacao": {
@@ -135,19 +207,35 @@
       }
     },
     {
-      "id": "e005",
+      "id": "e011",
       "usuarioId": "u001",
       "status": "entregue",
       "valor": 22.00,
       "distanciaKm": 4.5,
       "tempoEstimadoMin": 20,
-      "cepOrigem": "36.773.668",
-      "cepDestino": "36.773.190",
+      "cepOrigem": "36.701-160",
+      "cepDestino": "36.701-200",
       "criadoEm": "2026-03-15T14:00:00Z",
       "atualizadoEm": "2026-03-15T14:30:00Z",
       "avaliacao": {
         "estrelas": 4,
         "dataAvaliacao": "15/03/2026"
+      }
+    },
+    {
+      "id": "e012",
+      "usuarioId": "u002",
+      "status": "entregue",
+      "valor": 19.50,
+      "distanciaKm": 3.9,
+      "tempoEstimadoMin": 18,
+      "cepOrigem": "36.701-240",
+      "cepDestino": "36.701-270",
+      "criadoEm": "2026-03-10T09:00:00Z",
+      "atualizadoEm": "2026-03-10T09:45:00Z",
+      "avaliacao": {
+        "estrelas": 5,
+        "dataAvaliacao": "10/03/2026"
       }
     }
   ],
