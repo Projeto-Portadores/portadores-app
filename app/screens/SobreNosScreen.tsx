@@ -8,7 +8,6 @@ export default function SobreNosScreen({ navigation }: any) {
   return (
     <View style={styles.container}>
       <AppHeader navigation={navigation} />
-
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.pageTitle}>Sobre Nós</Text>
 

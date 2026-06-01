@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import AppHeader from '../components/AppHeader';
+import { View, Text, StyleSheet } from 'react-native';
 import BottomNavBar from '../components/BottomNavBar';
 import { cores } from '../theme';
+import AppHeader from '../components/AppHeader';
 
 export default function PagamentoScreen({ navigation, route }: any) {
   const valor = route?.params?.valor ?? 'R$ 47,00';
@@ -21,11 +21,7 @@ export default function PagamentoScreen({ navigation, route }: any) {
 
         <Text style={styles.label}>QR-Code PIX</Text>
         <View style={styles.qrBox}>
-          <Image
-            source={require('../assets/images/qrcode_placeholder.png')}
-            style={styles.qrImage}
-            resizeMode="contain"
-          />
+          <Text style={styles.qrPlaceholder}>📱 QR Code PIX</Text>
         </View>
 
         <Text style={styles.instrucao}>
@@ -45,7 +41,8 @@ const styles = StyleSheet.create({
   label: { color: cores.textoFraco, fontSize: 14, marginBottom: 10 },
   valorBox: { backgroundColor: cores.card, borderRadius: 12, paddingVertical: 12, paddingHorizontal: 40, marginBottom: 28 },
   valorText: { color: cores.amarelo, fontSize: 26, fontWeight: '700' },
-  qrBox: { backgroundColor: '#ffffff', borderRadius: 12, padding: 12, marginBottom: 24 },
+  qrBox: { backgroundColor: cores.card, borderRadius: 12, padding: 40, marginBottom: 24, alignItems: 'center', justifyContent: 'center', minHeight: 200 },
+  qrPlaceholder: { fontSize: 60, color: cores.azul },
   qrImage: { width: 180, height: 180 },
   instrucao: { color: cores.textoFraco, fontSize: 13, textAlign: 'center', lineHeight: 20 },
 });

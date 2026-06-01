@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image, StyleSheet, Dimensions, StatusBar } from 'react-native';
+import { cores } from '../theme';
 
 const { width, height } = Dimensions.get('window');
 
@@ -10,9 +11,9 @@ interface SplashScreenProps {
 export default function SplashScreen({ onFinish }: SplashScreenProps) {
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#1C2540" />
+      <StatusBar barStyle="light-content" backgroundColor={cores.fundo} />
       <Image
-        source={require('./assets/images/portadores_logo.png')}
+        source={require('../../assets/images/portadores-logo.png')}
         style={styles.logo}
         resizeMode="contain"
         onLoad={onFinish}
@@ -24,7 +25,7 @@ export default function SplashScreen({ onFinish }: SplashScreenProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1C2540',
+    backgroundColor: cores.fundo,
     alignItems: 'center',
     justifyContent: 'center',
   },

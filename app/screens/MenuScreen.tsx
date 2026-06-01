@@ -2,44 +2,34 @@ import React from 'react';
 import {
   View,
   Text,
-  Image,
   StyleSheet,
   TouchableOpacity,
   StatusBar,
+  ScrollView,
 } from 'react-native';
-import { BottomNavBar } from '../components/BottomNavBar';
+import AppHeader from '../components/AppHeader';
+import BottomNavBar from '../components/BottomNavBar';
+import { cores } from '../theme';
 
 export default function MenuScreen({ navigation }: any) {
   const menuItems = [
-    { label: 'Consultar pedido', key: 'consultar-pedido' },
-    { label: 'Consultar histórico', key: 'consultar-historico' },
-    { label: 'Consultar cupons', key: 'consultar-cupons' },
-    { label: 'Minhas avaliações', key: 'minhas-avaliacoes' },
+    { label: 'Consultar pedido', key: 'Consulta', screen: 'ConsultaScreen' },
+    { label: 'Minhas entregas', key: 'minhas-entregas', screen: 'MinhasEntregasScreen' },
+    { label: 'Solicitação', key: 'solicitacao', screen: 'SolicitacaoScreen' },
+    { label: 'Sobre nós', key: 'sobre-nos', screen: 'SobreNos' },
   ];
 
-  const handleMenuPress = (key: string) => {
-    // Navegar para as telas correspondentes
-    console.log('Navegando para:', key);
+  const handleMenuPress = (screen: string) => {
+    navigation.navigate(screen);
   };
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#1C2540" />
-
-      {/* Header */}
-      <View style={styles.header}>
-        <Image
-          source={require('../../assets/images/portadores-logo.png')}
-          style={styles.logoSmall}
-          resizeMode="contain"
-        />
-        <TouchableOpacity onPress={() => navigation?.goBack()}>
-          <Text style={styles.exitIcon}>📤</Text>
-        </TouchableOpacity>
-      </View>
+      <StatusBar barStyle="light-content" backgroundColor={cores.fundo} />
+      <AppHeader navigation={navigation} />
 
       {/* Conteúdo */}
-      <View style={styles.content}>
+      <ScrollView contentContainerStyle={styles.scroll}>
         <Text style={styles.pageTitle}>Início</Text>
         <Text style={styles.subtitle}>O que deseja fazer?</Text>
 
@@ -49,18 +39,16 @@ export default function MenuScreen({ navigation }: any) {
             <TouchableOpacity
               key={item.key}
               style={styles.menuButton}
-              onPress={() => handleMenuPress(item.key)}
+              onPress={() => handleMenuPress(item.screen)}
             >
               <Text style={styles.menuButtonText}>{item.label}</Text>
             </TouchableOpacity>
           ))}
         </View>
-      </View>
+      </ScrollView>
 
       {/* Navbar */}
-      <BottomNavBar onPress={(tab) => {if (tab === 'home') {
-      navigation.navigate('MenuScreen');
-    }} }/>
+      <BottomNavBar navigation={navigation} usuarioLogado={true} />
     </View>
   );
 }
@@ -68,38 +56,21 @@ export default function MenuScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1C2540',
+    backgroundColor: cores.fundo,
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 48,
-    paddingBottom: 8,
-  },
-  logoSmall: {
-    width: 48,
-    height: 48,
-  },
-  exitIcon: {
-    fontSize: 26,
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  scroll: {
     paddingHorizontal: 28,
+    paddingVertical: 28,
   },
   pageTitle: {
-    color: '#ffffff',
+    color: cores.textoBranco,
     fontSize: 32,
     fontWeight: '700',
     textAlign: 'center',
     marginBottom: 16,
   },
   subtitle: {
-    color: '#b0bcd4',
+    color: cores.textoFraco,
     fontSize: 18,
     fontWeight: '600',
     textAlign: 'center',
@@ -110,16 +81,16 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   menuButton: {
-    backgroundColor: '#1a1f2e',
+    backgroundColor: cores.card,
     borderWidth: 2,
-    borderColor: '#4A90D9',
+    borderColor: cores.azul,
     borderRadius: 24,
     paddingVertical: 16,
     paddingHorizontal: 24,
     alignItems: 'center',
   },
   menuButtonText: {
-    color: '#ffffff',
+    color: cores.textoBranco,
     fontSize: 16,
     fontWeight: '600',
   },

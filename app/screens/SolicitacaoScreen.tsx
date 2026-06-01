@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
-  Image,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
   StatusBar,
   TextInput,
+  Alert,
 } from 'react-native';
-import { BottomNavBar } from '../components/BottomNavBar';
+import AppHeader from '../components/AppHeader';
+import BottomNavBar from '../components/BottomNavBar';
+import { cores } from '../theme';
 
 export default function SolicitacaoScreen({ navigation }: any) {
   const [formData, setFormData] = useState({
@@ -25,35 +27,18 @@ export default function SolicitacaoScreen({ navigation }: any) {
   };
 
   const handleConcluir = () => {
-    console.log('Pedido concluído:', formData);
-  };
-
-  const handleBottomNavPress = (tab: string) => {
-    const navigationMap: Record<string, string> = {
-      'home': 'MenuScreen',
-      'caixa': 'MinhasEntregasScreen',
-      'novo': 'NovasEntregasScreen',
-      'dinheiro': 'MeusGanhosScreen',
-      'perfil': 'PerfilScreen',
-    };
-    navigation.navigate(navigationMap[tab]);
+    if (!formData.cepOrigem || !formData.refOrigem || !formData.cepDestino || !formData.refDestino) {
+      Alert.alert('Erro', 'Preencha todos os campos obrigatórios');
+      return;
+    }
+    Alert.alert('Sucesso', 'Pedido solicitado com sucesso!');
+    navigation.goBack();
   };
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#1C2540" />
-
-      {/* Header */}
-      <View style={styles.header}>
-        <Image
-          source={require('../../assets/images/portadores-logo.png')}
-          style={styles.logoSmall}
-          resizeMode="contain"
-        />
-        <TouchableOpacity onPress={() => navigation?.goBack()}>
-          <Text style={styles.exitIcon}>📤</Text>
-        </TouchableOpacity>
-      </View>
+      <StatusBar barStyle="light-content" backgroundColor={cores.fundo} />
+      <AppHeader navigation={navigation} />
 
       {/* Conteúdo */}
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
@@ -125,7 +110,7 @@ export default function SolicitacaoScreen({ navigation }: any) {
       </ScrollView>
 
       {/* Navbar */}
-      <BottomNavBar onPress={handleBottomNavPress} />
+      <BottomNavBar navigation={navigation} usuarioLogado={true} />
     </View>
   );
 }
@@ -133,29 +118,14 @@ export default function SolicitacaoScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1C2540',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 48,
-    paddingBottom: 8,
-  },
-  logoSmall: {
-    width: 48,
-    height: 48,
-  },
-  exitIcon: {
-    fontSize: 26,
+    backgroundColor: cores.fundo,
   },
   scroll: {
     paddingHorizontal: 28,
     paddingBottom: 24,
   },
   pageTitle: {
-    color: '#ffffff',
+    color: cores.textoBranco,
     fontSize: 28,
     fontWeight: '700',
     textAlign: 'center',
@@ -166,20 +136,20 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   label: {
-    color: '#b0bcd4',
+    color: cores.textoFraco,
     fontSize: 13,
     fontWeight: '600',
     marginBottom: 8,
     textAlign: 'center',
   },
   input: {
-    backgroundColor: '#2e3a5c',
+    backgroundColor: cores.input,
     borderWidth: 2,
-    borderColor: '#4A90D9',
+    borderColor: cores.azul,
     borderRadius: 20,
     paddingVertical: 12,
     paddingHorizontal: 16,
-    color: '#ffffff',
+    color: cores.textoBranco,
     marginBottom: 20,
     textAlign: 'center',
   },
@@ -188,31 +158,31 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   valorLabel: {
-    color: '#ffffff',
+    color: cores.textoBranco,
     fontSize: 16,
     fontWeight: '600',
     marginBottom: 8,
   },
   valorAmount: {
-    color: '#FF8C00',
+    color: cores.laranja,
     fontWeight: '700',
   },
   valorInfo: {
-    color: '#b0bcd4',
+    color: cores.textoFraco,
     fontSize: 12,
     textAlign: 'center',
   },
   concludeButton: {
-    backgroundColor: '#1a1f2e',
+    backgroundColor: cores.card,
     borderWidth: 2,
-    borderColor: '#ffffff',
+    borderColor: cores.textoBranco,
     borderRadius: 24,
     paddingVertical: 14,
     paddingHorizontal: 24,
     alignItems: 'center',
   },
   concludeButtonText: {
-    color: '#ffffff',
+    color: cores.textoBranco,
     fontSize: 16,
     fontWeight: '700',
   },

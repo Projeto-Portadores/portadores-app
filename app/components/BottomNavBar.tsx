@@ -5,15 +5,32 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import { cores } from '../theme';
 
-export function BottomNavBar({ onPress }: { onPress?: (tab: string) => void }) {
+export default function BottomNavBar({
+  navigation,
+  usuarioLogado = false,
+  onPress,
+}: {
+  navigation?: any;
+  usuarioLogado?: boolean;
+  onPress?: (tab: string) => void;
+}) {
   const tabs = [
-    { key: 'home',    emoji: '🏠' },
-    { key: 'caixa',   emoji: '📦' },
-    { key: 'novo',    emoji: '➕', destaque: true },
-    { key: 'dinheiro',emoji: '💰' },
-    { key: 'perfil',  emoji: '👤' },
+    { key: 'home', emoji: '🏠', screen: 'MenuScreen' },
+    { key: 'caixa', emoji: '📦', screen: 'MinhasEntregasScreen' },
+    { key: 'novo', emoji: '➕', destaque: true, screen: 'NovasEntregasScreen' },
+    { key: 'dinheiro', emoji: '💰', screen: 'MeusGanhosScreen' },
+    { key: 'perfil', emoji: '👤', screen: 'ConsultaScreen' },
   ];
+
+  const handlePress = (tab: { key: string; screen: string }) => {
+    if (onPress) {
+      onPress(tab.key);
+    } else if (navigation && usuarioLogado) {
+      navigation.navigate(tab.screen);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -21,7 +38,7 @@ export function BottomNavBar({ onPress }: { onPress?: (tab: string) => void }) {
         <TouchableOpacity
           key={tab.key}
           style={tab.destaque ? styles.btnDestaque : styles.btn}
-          onPress={() => onPress?.(tab.key)}
+          onPress={() => handlePress(tab)}
         >
           <Text style={tab.destaque ? styles.emojiDestaque : styles.emoji}>
             {tab.emoji}
@@ -35,9 +52,9 @@ export function BottomNavBar({ onPress }: { onPress?: (tab: string) => void }) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: '#1C2540',
+    backgroundColor: cores.fundo,
     borderTopWidth: 1,
-    borderTopColor: '#2e3a5c',
+    borderTopColor: cores.borda,
     paddingVertical: 10,
     paddingHorizontal: 16,
     alignItems: 'center',
@@ -52,12 +69,12 @@ const styles = StyleSheet.create({
     width: 52,
     height: 52,
     borderRadius: 26,
-    backgroundColor: '#2e3a5c',
+    backgroundColor: cores.card,
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 8,
     borderWidth: 2,
-    borderColor: '#4A90D9',
+    borderColor: cores.azul,
   },
   emoji: {
     fontSize: 22,

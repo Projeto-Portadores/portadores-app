@@ -8,7 +8,7 @@ function Estrelas({ quantidade }: { quantidade: number }) {
   return (
     <View style={{ flexDirection: 'row', gap: 2 }}>
       {[1, 2, 3, 4, 5].map((i) => (
-        <Text key={i} style={{ fontSize: 14, color: i <= quantidade ? cores.amarelo : '#444' }}>★</Text>
+        <Text key={i} style={{ fontSize: 14, color: i <= quantidade ? cores.amarelo : cores.borda }}>★</Text>
       ))}
     </View>
   );
@@ -45,7 +45,7 @@ const card = StyleSheet.create({
   statusBadge: { borderWidth: 1.5, borderRadius: 20, paddingVertical: 3, paddingHorizontal: 14, alignSelf: 'flex-start' },
   statusText: { fontSize: 13, fontWeight: '700' },
   avaliacaoLabel: { color: cores.textoFraco, fontSize: 12, marginTop: 2 },
-  data: { color: '#6a7a9a', fontSize: 10, marginTop: 2 },
+  data: { color: cores.textoFraco, fontSize: 10, marginTop: 2 },
   right: { alignItems: 'flex-end', gap: 6, flex: 1 },
   cep: { color: cores.textoFraco, fontSize: 12 },
   valor: { color: cores.laranja, fontSize: 16, fontWeight: '700' },

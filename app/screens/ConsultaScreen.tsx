@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
-  Image,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
   StatusBar,
   TextInput,
+  TouchableOpacity,
+  Alert,
 } from 'react-native';
-import { BottomNavBar } from '../components/BottomNavBar';
+import AppHeader from '../components/AppHeader';
+import BottomNavBar from '../components/BottomNavBar';
+import { cores } from '../theme';
 
-export default function ConsultarScreen({ navigation }: any) {
+export default function ConsultaScreen({ navigation }: any) {
   const [idPedido, setIdPedido] = useState('');
   const [statusPedido, setStatusPedido] = useState<string | null>(null);
   const [consulted, setConsulted] = useState(false);
@@ -21,35 +23,15 @@ export default function ConsultarScreen({ navigation }: any) {
       // Simular consulta - em produção, seria uma chamada à API
       setStatusPedido('Pedido Entregue');
       setConsulted(true);
+    } else {
+      Alert.alert('Erro', 'Digite um ID válido');
     }
-  };
-
-  const handleBottomNavPress = (tab: string) => {
-    const navigationMap: Record<string, string> = {
-      'home': 'MenuScreen',
-      'caixa': 'MinhasEntregasScreen',
-      'novo': 'NovasEntregasScreen',
-      'dinheiro': 'MeusGanhosScreen',
-      'perfil': 'PerfilScreen',
-    };
-    navigation.navigate(navigationMap[tab]);
   };
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#1C2540" />
-
-      {/* Header */}
-      <View style={styles.header}>
-        <Image
-          source={require('../../assets/images/portadores-logo.png')}
-          style={styles.logoSmall}
-          resizeMode="contain"
-        />
-        <TouchableOpacity onPress={() => navigation?.goBack()}>
-          <Text style={styles.exitIcon}>📤</Text>
-        </TouchableOpacity>
-      </View>
+      <StatusBar barStyle="light-content" backgroundColor={cores.fundo} />
+      <AppHeader navigation={navigation} />
 
       {/* Conteúdo */}
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
@@ -61,7 +43,7 @@ export default function ConsultarScreen({ navigation }: any) {
           <TextInput
             style={styles.input}
             placeholder="Digite o ID"
-            placeholderTextColor="#666"
+            placeholderTextColor={cores.textoFraco}
             value={idPedido}
             onChangeText={setIdPedido}
             keyboardType="numeric"
@@ -85,7 +67,7 @@ export default function ConsultarScreen({ navigation }: any) {
       </ScrollView>
 
       {/* Navbar */}
-      <BottomNavBar onPress={handleBottomNavPress} />
+      <BottomNavBar navigation={navigation} usuarioLogado={true} />
     </View>
   );
 }
@@ -93,29 +75,14 @@ export default function ConsultarScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1C2540',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 48,
-    paddingBottom: 8,
-  },
-  logoSmall: {
-    width: 48,
-    height: 48,
-  },
-  exitIcon: {
-    fontSize: 26,
+    backgroundColor: cores.fundo,
   },
   scroll: {
     paddingHorizontal: 28,
     paddingBottom: 24,
   },
   pageTitle: {
-    color: '#ffffff',
+    color: cores.textoBranco,
     fontSize: 28,
     fontWeight: '700',
     textAlign: 'center',
@@ -126,27 +93,27 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   label: {
-    color: '#b0bcd4',
+    color: cores.textoFraco,
     fontSize: 13,
     fontWeight: '600',
     marginBottom: 8,
     textAlign: 'center',
   },
   input: {
-    backgroundColor: '#2e3a5c',
+    backgroundColor: cores.input,
     borderWidth: 2,
-    borderColor: '#4A90D9',
+    borderColor: cores.azul,
     borderRadius: 20,
     paddingVertical: 12,
     paddingHorizontal: 16,
-    color: '#ffffff',
+    color: cores.textoBranco,
     textAlign: 'center',
     fontSize: 16,
   },
   consultarButton: {
-    backgroundColor: '#1a1f2e',
+    backgroundColor: cores.card,
     borderWidth: 2,
-    borderColor: '#ffffff',
+    borderColor: cores.textoBranco,
     borderRadius: 24,
     paddingVertical: 14,
     paddingHorizontal: 24,
@@ -154,7 +121,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   consultarButtonText: {
-    color: '#ffffff',
+    color: cores.textoBranco,
     fontSize: 16,
     fontWeight: '700',
   },
@@ -162,21 +129,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   statusLabel: {
-    color: '#b0bcd4',
+    color: cores.textoFraco,
     fontSize: 13,
     fontWeight: '600',
     marginBottom: 16,
     textAlign: 'center',
   },
   statusBadge: {
-    backgroundColor: '#a0a0a0',
+    backgroundColor: cores.azul,
     borderRadius: 20,
     paddingVertical: 12,
     paddingHorizontal: 32,
     alignItems: 'center',
   },
   statusText: {
-    color: '#2d8659',
+    color: cores.textoBranco,
     fontSize: 16,
     fontWeight: '700',
   },

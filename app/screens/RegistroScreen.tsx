@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
+
+import { cores } from '../theme';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import { cores } from '../theme';
 
 const BASE_URL = 'http://10.0.2.2:3000';
 // const BASE_URL = 'http://localhost:3000'; // iOS simulator
@@ -71,7 +72,7 @@ export default function RegistroScreen({ navigation }: any) {
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
 
         <Image
-          source={require('../assets/images/portadores_logo.png')}
+          source={require('../../assets/images/portadores-logo.png')}
           style={styles.logo}
           resizeMode="contain"
         />

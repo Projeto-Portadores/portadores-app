@@ -7,7 +7,9 @@ import {
   Image,
   StyleSheet,
   StatusBar,
+  ScrollView,
 } from 'react-native';
+import { cores } from '../theme';
 
 export default function PrimeiroAcessoScreen() {
   const [nomeCompleto, setNomeCompleto] = useState('');
@@ -115,7 +117,7 @@ export default function PrimeiroAcessoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1C2540',
+    backgroundColor: cores.fundo,
     alignItems: 'center',
     paddingTop: 40,
     paddingHorizontal: 40,
@@ -125,21 +127,21 @@ const styles = StyleSheet.create({
     height: 90,
   },
   appName: {
-    color: '#D4CCBA',
+    color: cores.textoClaro,
     fontSize: 13,
     fontWeight: '700',
     letterSpacing: 3,
     marginTop: 4,
   },
   title: {
-    color: '#ffffff',
+    color: cores.textoBranco,
     fontSize: 26,
     fontWeight: '700',
     marginTop: 20,
     marginBottom: 24,
   },
   label: {
-    color: '#D4CCBA',
+    color: cores.textoClaro,
     fontSize: 14,
     fontWeight: '600',
     alignSelf: 'flex-start',
@@ -148,11 +150,11 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '100%',
-    backgroundColor: '#2e3a5c',
+    backgroundColor: cores.input,
     borderRadius: 24,
     height: 44,
     paddingHorizontal: 18,
-    color: '#ffffff',
+    color: cores.textoBranco,
     fontSize: 15,
     marginBottom: 6,
   },
@@ -168,31 +170,31 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#D4CCBA',
+    borderColor: cores.textoClaro,
   },
   perfilButtonSelected: {
-    backgroundColor: '#1a1a2e',
-    borderColor: '#E8733A',
+    backgroundColor: cores.card,
+    borderColor: cores.laranja,
   },
   perfilButtonText: {
-    color: '#D4CCBA',
+    color: cores.textoClaro,
     fontSize: 14,
     fontWeight: '600',
   },
   perfilButtonTextSelected: {
-    color: '#E8733A',
+    color: cores.laranja,
   },
   button: {
     marginTop: 20,
-    backgroundColor: '#1a1a2e',
+    backgroundColor: cores.card,
     borderRadius: 30,
     paddingVertical: 14,
     paddingHorizontal: 48,
     borderWidth: 1,
-    borderColor: '#333',
+    borderColor: cores.borda,
   },
   buttonText: {
-    color: '#ffffff',
+    color: cores.textoBranco,
     fontSize: 16,
     fontWeight: '700',
   },
